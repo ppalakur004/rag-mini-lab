@@ -14,22 +14,24 @@ from rag_lab.models import (
 
 REFUSE_ANSWER = "The provided policy does not answer this question."
 
-SYSTEM_PROMPT = """Answer the question using only the policy excerpts below.
-Include the section that supports your answer.
-If the excerpts do not contain the answer, respond:
-"The provided policy does not answer this question."
-
-Reply with JSON only, using this schema:
+SYSTEM_PROMPT = """Reply with JSON only, using this schema:
 {"answer": "<string>", "section": "<section number like 1, or null>"}
 
-Rules:
-- Use only the provided policy excerpts.
-- Do not add unsupported information.
-- If you answer, set section to the supporting excerpt's section number.
-- If the excerpts do not contain the answer, set answer to exactly
-  "The provided policy does not answer this question." and section to null.
-- If the question is not answered by these excerpts (for example a benefit the excerpts never mention), refuse.
-- If any excerpt is on the same topic, you must answer and cite that excerpt. Do not refuse for synonyms, omitted conditions, or amounts compared with a stated limit.
+Paraphrase rule (mandatory): synonyms and paraphrases of an excerpt's rule still count as answered by that excerpt. You MUST answer from that excerpt and set section to its number. Different wording is not a reason to refuse.
+Examples:
+- first-class ≈ non-economy airfare. Apply the Airfare excerpt (economy required; business-class needs VP approval). Do not refuse just because the excerpt says economy/business instead of "first-class".
+- limousine ≈ luxury vehicle upgrade. Apply the Ground Transportation excerpt (luxury vehicle upgrades are not reimbursable). Do not refuse just because the excerpt says luxury vehicle instead of "limousine".
+
+Correct JSON for those paraphrase cases:
+{"answer":"Employees must purchase economy airfare. Business-class airfare requires written VP approval.","section":"3"}
+{"answer":"Luxury vehicle upgrades are not reimbursable.","section":"4"}
+
+Refuse ONLY when no excerpt states a rule that applies even after synonym/paraphrase matching (for example a benefit the excerpts never mention, such as gym memberships). Then set answer to exactly "The provided policy does not answer this question." and section to null.
+
+Use only the provided policy excerpts.
+Do not add unsupported information.
+If you answer, set section to the supporting excerpt's section number.
+If any excerpt is on the same topic, you must answer and cite that excerpt. Do not refuse for synonyms, omitted conditions, or amounts compared with a stated limit.
 """
 
 
