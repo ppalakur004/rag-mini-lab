@@ -1,0 +1,140 @@
+[
+  {
+    "question": "How much can I spend on food each day?",
+    "response": {
+      "answer": "Employees may claim up to $65 per day for meals.",
+      "citation": {
+        "document": "Employee Expense Policy",
+        "version": "2.0",
+        "section": "1. Meals"
+      },
+      "retrieved_chunks": [
+        {
+          "section": "1. Meals",
+          "distance": 0.6333820879372194
+        },
+        {
+          "section": "2. Hotels",
+          "distance": 0.7425689927426853
+        },
+        {
+          "section": "5. Receipts",
+          "distance": 0.8248731613461586
+        }
+      ]
+    }
+  },
+  {
+    "question": "Can I book first-class airfare?",
+    "response": {
+      "answer": "The provided policy does not answer this question.",
+      "citation": null,
+      "retrieved_chunks": [
+        {
+          "section": "3. Airfare",
+          "distance": 0.500287413562841
+        },
+        {
+          "section": "4. Ground Transportation",
+          "distance": 0.783505256950227
+        },
+        {
+          "section": "1. Meals",
+          "distance": 0.8012160479297605
+        }
+      ]
+    }
+  },
+  {
+    "question": "My hotel costs $250. What do I need?",
+    "response": {
+      "answer": "Receipts are required and the hotel costs exceed the reimbursable limit of $225 per night. A manager must approve the higher rate before booking.",
+      "citation": {
+        "document": "Employee Expense Policy",
+        "version": "2.0",
+        "section": "2. Hotels"
+      },
+      "retrieved_chunks": [
+        {
+          "section": "2. Hotels",
+          "distance": 0.4331653972366689
+        },
+        {
+          "section": "5. Receipts",
+          "distance": 0.6801888930628658
+        },
+        {
+          "section": "1. Meals",
+          "distance": 0.7212385618317545
+        }
+      ]
+    }
+  },
+  {
+    "question": "Do I need a receipt for a $20 taxi?",
+    "response": {
+      "answer": "The provided policy does not explicitly state whether a receipt is required for a $20 taxi. However, since receipts are required for individual expenses of $25 or more (Section 5), it can be inferred that a receipt is not required for a $20 taxi.",
+      "citation": {
+        "document": "Employee Expense Policy",
+        "version": "2.0",
+        "section": "5. Receipts"
+      },
+      "retrieved_chunks": [
+        {
+          "section": "5. Receipts",
+          "distance": 0.3841611423108239
+        },
+        {
+          "section": "4. Ground Transportation",
+          "distance": 0.6525261932549016
+        },
+        {
+          "section": "1. Meals",
+          "distance": 0.6892921288087133
+        }
+      ]
+    }
+  },
+  {
+    "question": "Can I claim a limousine upgrade?",
+    "response": {
+      "answer": "The provided policy does not answer this question.",
+      "citation": null,
+      "retrieved_chunks": [
+        {
+          "section": "4. Ground Transportation",
+          "distance": 0.46643266682040596
+        },
+        {
+          "section": "5. Receipts",
+          "distance": 0.6954183825102356
+        },
+        {
+          "section": "3. Airfare",
+          "distance": 0.7076439784209761
+        }
+      ]
+    }
+  },
+  {
+    "question": "Does the company reimburse gym memberships?",
+    "response": {
+      "answer": "The provided policy does not answer this question.",
+      "citation": null,
+      "retrieved_chunks": [
+        {
+          "section": "4. Ground Transportation",
+          "distance": 0.7150502842604756
+        },
+        {
+          "section": "5. Receipts",
+          "distance": 0.7220830354591545
+        },
+        {
+          "section": "2. Hotels",
+          "distance": 0.7260030426383923
+        }
+      ]
+    }
+  }
+]

@@ -19,7 +19,7 @@ def postgres_dsn() -> str:
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def dsn() -> str:
     return postgres_dsn()
 
