@@ -2,7 +2,7 @@
   {
     "question": "How much can I spend on food each day?",
     "response": {
-      "answer": "Employees may claim up to $65 per day for meals while traveling overnight.",
+      "answer": "$65",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -27,7 +27,7 @@
   {
     "question": "Can I book first-class airfare?",
     "response": {
-      "answer": "Employees must purchase economy airfare. Business-class airfare requires written VP approval.",
+      "answer": "Employees must purchase economy airfare. Business-class airfare requires written approval from a vice president.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -52,7 +52,7 @@
   {
     "question": "My hotel costs $250. What do I need?",
     "response": {
-      "answer": "Employees may claim up to $225 per night for hotel expenses. Since your hotel costs $250, you will need manager approval before booking.",
+      "answer": "A manager must approve the hotel costs. Receipts are required for individual expenses of $25 or more.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -77,7 +77,7 @@
   {
     "question": "Do I need a receipt for a $20 taxi?",
     "response": {
-      "answer": "Receipts are required for individual expenses of $25 or more. Since the taxi cost is $20, a receipt is not required.",
+      "answer": "Receipts are required for individual expenses of $25 or more.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -102,12 +102,8 @@
   {
     "question": "Can I claim a limousine upgrade?",
     "response": {
-      "answer": "Luxury vehicle upgrades are not reimbursable.",
-      "citation": {
-        "document": "Employee Expense Policy",
-        "version": "2.0",
-        "section": "4. Ground Transportation"
-      },
+      "answer": "The provided policy does not answer this question.",
+      "citation": null,
       "retrieved_chunks": [
         {
           "section": "4. Ground Transportation",

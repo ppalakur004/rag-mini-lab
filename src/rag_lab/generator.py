@@ -17,19 +17,11 @@ REFUSE_ANSWER = "The provided policy does not answer this question."
 SYSTEM_PROMPT = """Reply with JSON only, using this schema:
 {"answer": "<string>", "section": "<section number like 1, or null>"}
 
-Paraphrase rule (mandatory): synonyms and paraphrases of an excerpt's rule still count as answered by that excerpt. You MUST answer from that excerpt and set section to its number. Different wording is not a reason to refuse.
-Examples:
-- first-class ≈ non-economy airfare. Apply the Airfare excerpt (economy required; business-class needs VP approval). Do not refuse just because the excerpt says economy/business instead of "first-class".
-- limousine ≈ luxury vehicle upgrade. Apply the Ground Transportation excerpt (luxury vehicle upgrades are not reimbursable). Do not refuse just because the excerpt says luxury vehicle instead of "limousine".
+Treat synonyms of excerpt rules as answered by that excerpt. A more specific vehicle type can match a luxury-upgrade rule; a cabin class other than economy can match an economy-required rule. Different wording is not a reason to refuse.
 
-Correct JSON for those paraphrase cases:
-{"answer":"Employees must purchase economy airfare. Business-class airfare requires written VP approval.","section":"3"}
-{"answer":"Luxury vehicle upgrades are not reimbursable.","section":"4"}
+Refuse only when no excerpt states an applicable rule even after synonym matching (for example a benefit the excerpts never mention). Then set answer to exactly "The provided policy does not answer this question." and section to null.
 
-Refuse ONLY when no excerpt states a rule that applies even after synonym/paraphrase matching (for example a benefit the excerpts never mention, such as gym memberships). Then set answer to exactly "The provided policy does not answer this question." and section to null.
-
-Use only the provided policy excerpts.
-Do not add unsupported information.
+Use only the provided policy excerpts; do not add facts that are not in them.
 If you answer, set section to the supporting excerpt's section number.
 If any excerpt is on the same topic, you must answer and cite that excerpt. Do not refuse for synonyms, omitted conditions, or amounts compared with a stated limit.
 """
@@ -75,10 +67,10 @@ class Generator:
             "Policy excerpts:\n"
             + "\n\n".join(excerpts)
             + f"\n\nQuestion: {question}\n\n"
-            "If the question is not answered by these excerpts (for example a benefit the excerpts never mention), refuse.\n"
-            "Otherwise you must answer from the closest matching excerpt and set section to that excerpt's number.\n"
-            "Map food to meals, first-class to airfare/economy, limousines to luxury vehicle upgrades, and taxi/dollar receipt questions to the receipts threshold (required at $25 or more, not required below).\n"
-            "If a condition such as overnight travel is in the excerpt but not the question, still state the excerpt's rule."
+            "If the question is not answered by these excerpts even after synonym matching "
+            "(for example a benefit the excerpts never mention), refuse.\n"
+            "Otherwise answer from the matching excerpt and set section to that excerpt's number.\n"
+            "If a condition is in the excerpt but not the question, still state the excerpt's rule."
         )
         response = httpx.post(
             self._url,
