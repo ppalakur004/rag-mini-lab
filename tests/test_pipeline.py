@@ -13,6 +13,11 @@ class FakeEmbedder:
         return [[float(i), 0.0] + [0.0] * 382 for i, _ in enumerate(texts)]
 
 
+class ShortVectorFakeEmbedder:
+    def embed_many(self, texts: list[str]) -> list[list[float]]:
+        return [[0.0] * 384 for _ in texts[: len(texts) - 1]]
+
+
 class FakeStore:
     def __init__(self) -> None:
         self.upserted: list[Chunk] = []
@@ -36,3 +41,11 @@ def test_ingest_policy_rejects_wrong_chunk_count(tmp_path: Path):
     policy.write_text("# Employee Expense Policy — Version 2.0\n\n## 1. Meals\nOnly one.\n", encoding="utf-8")
     with pytest.raises(ValueError, match="expected 6 chunks"):
         ingest_policy(policy, FakeEmbedder(), FakeStore())
+
+
+def test_ingest_policy_rejects_fewer_embeddings_than_chunks():
+    path = Path(__file__).resolve().parents[1] / "policy.md"
+    store = FakeStore()
+    with pytest.raises(ValueError, match="expected 6 embeddings, got 5"):
+        ingest_policy(path, ShortVectorFakeEmbedder(), store)
+    assert store.upserted == []

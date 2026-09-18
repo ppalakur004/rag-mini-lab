@@ -17,6 +17,8 @@ def ingest_policy(path: Path, embedder: Embedder, store: ChunkStore) -> list[Chu
     if len(chunks) != 6:
         raise ValueError(f"expected 6 chunks, got {len(chunks)}")
     vectors = embedder.embed_many([chunk.text for chunk in chunks])
+    if len(vectors) != len(chunks) or len(vectors) != 6:
+        raise ValueError(f"expected 6 embeddings, got {len(vectors)}")
     embedded = [replace(chunk, embedding=vector) for chunk, vector in zip(chunks, vectors)]
     store.upsert_chunks(embedded)
     return embedded
