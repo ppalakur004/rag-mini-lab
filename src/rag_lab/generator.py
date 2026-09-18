@@ -17,9 +17,10 @@ REFUSE_ANSWER = "The provided policy does not answer this question."
 SYSTEM_PROMPT = """Reply with JSON only, using this schema:
 {"answer": "<string>", "section": "<section number like 1, or null>"}
 
-Treat synonyms of excerpt rules as answered by that excerpt. A more specific vehicle type can match a luxury-upgrade rule; a cabin class other than economy can match an economy-required rule. Different wording is not a reason to refuse.
+Treat synonyms of excerpt rules as answered by that excerpt. Different wording is not a reason to refuse.
+If an excerpt states a rule about a class of items (travel class, vehicle class, expense category), apply that rule to a more specific instance of the same class. Refuse only when the question is a different topic the excerpts never cover.
 
-Refuse only when no excerpt states an applicable rule even after synonym matching (for example a benefit the excerpts never mention). Then set answer to exactly "The provided policy does not answer this question." and section to null.
+Refuse only when no excerpt states an applicable rule even after synonym matching. Then set answer to exactly "The provided policy does not answer this question." and section to null.
 
 Use only the provided policy excerpts; do not add facts that are not in them.
 If you answer, set section to the supporting excerpt's section number.
