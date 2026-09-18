@@ -2,7 +2,7 @@
   {
     "question": "How much can I spend on food each day?",
     "response": {
-      "answer": "Up to $65",
+      "answer": "You can spend up to $65 per day for meals while traveling overnight. (Section 1)",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -52,7 +52,7 @@
   {
     "question": "My hotel costs $250. What do I need?",
     "response": {
-      "answer": "A manager must approve the booking.",
+      "answer": "You need a manager's approval for your hotel costs of $250 and a receipt if the individual expense is $25 or more. (Section 2, Section 5)",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -77,11 +77,11 @@
   {
     "question": "Do I need a receipt for a $20 taxi?",
     "response": {
-      "answer": "No, a receipt is not required for a $20 taxi as per Section 4. Ground Transportation.",
+      "answer": "Receipts are required for individual expenses of $25 or more.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
-        "section": "4. Ground Transportation"
+        "section": "5. Receipts"
       },
       "retrieved_chunks": [
         {
@@ -102,7 +102,7 @@
   {
     "question": "Can I claim a limousine upgrade?",
     "response": {
-      "answer": "Not reimbursable",
+      "answer": "Luxury vehicle upgrades are not reimbursable.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",

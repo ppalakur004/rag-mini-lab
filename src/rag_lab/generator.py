@@ -14,11 +14,19 @@ from rag_lab.models import (
 
 REFUSE_ANSWER = "The provided policy does not answer this question."
 
-SYSTEM_PROMPT = """Reply with JSON only, using this schema:
+SYSTEM_PROMPT = """Answer the question using only the policy excerpts below.
+Include the section that supports your answer.
+If the excerpts do not contain the answer, respond:
+"The provided policy does not answer this question."
+
+Reply with JSON only, using this schema:
 {"answer": "<string>", "section": "<section number like 1, or null>"}
 
-Use only the provided policy excerpts; do not add facts that are not in them.
-Answer only from an applicable excerpt rule after synonym or class-to-instance matching.
+Use only the provided policy excerpts.
+- Answer from an applicable excerpt rule after synonym or class-to-instance matching (a more specific instance of a forbidden/required class still matches that class rule). Restate the answering excerpt's rule(s) in the answer.
+- Cite the excerpt whose rule actually answers the question, not an excerpt that only mentions a related expense type. If two excerpts mention related items, cite only the one whose rule answers the asked requirement. Set section to exactly one number copied from that answering excerpt's header.
+- When an excerpt states a required class, include that requirement in the answer if asked about a different class. Name the required class.
+- Refuse with the exact sentence and section null when no applicable rule exists (a benefit the excerpts never mention).
 """
 
 
@@ -62,11 +70,17 @@ class Generator:
             "Policy excerpts:\n"
             + "\n\n".join(excerpts)
             + f"\n\nQuestion: {question}\n\n"
-            "If no excerpt states an applicable rule after synonym and class-to-instance "
-            "matching (for example a benefit the excerpts never mention), refuse.\n"
-            "Otherwise answer from the matching excerpt and set section to that excerpt's number.\n"
-            "When an excerpt states a required class (for example a required fare class), "
-            "state that requirement when asked about a different class."
+            "Answer from an applicable excerpt rule after synonym or class-to-instance matching "
+            "(a more specific instance of a forbidden/required class still matches that class rule). "
+            "Restate the answering excerpt's rule(s) in the answer.\n"
+            "Cite the excerpt whose rule actually answers the question, not an excerpt that only "
+            "mentions a related expense type. If two excerpts mention related items, cite only the "
+            "one whose rule answers the asked requirement. Set section to exactly one number copied "
+            "from that answering excerpt's header.\n"
+            "When an excerpt states a required class, include that requirement in the answer if "
+            "asked about a different class. Name the required class.\n"
+            "If no applicable rule exists (a benefit the excerpts never mention), refuse with the "
+            "exact sentence and section null.\n"
         )
         response = httpx.post(
             self._url,
