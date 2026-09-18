@@ -17,14 +17,8 @@ REFUSE_ANSWER = "The provided policy does not answer this question."
 SYSTEM_PROMPT = """Reply with JSON only, using this schema:
 {"answer": "<string>", "section": "<section number like 1, or null>"}
 
-Treat synonyms of excerpt rules as answered by that excerpt. Different wording is not a reason to refuse.
-If an excerpt states a rule about a class of items (travel class, vehicle class, expense category), apply that rule to a more specific instance of the same class. Refuse only when the question is a different topic the excerpts never cover.
-
-Refuse only when no excerpt states an applicable rule even after synonym matching. Then set answer to exactly "The provided policy does not answer this question." and section to null.
-
 Use only the provided policy excerpts; do not add facts that are not in them.
-If you answer, set section to the supporting excerpt's section number.
-If any excerpt is on the same topic, you must answer and cite that excerpt. Do not refuse for synonyms, omitted conditions, or amounts compared with a stated limit.
+Answer only from an applicable excerpt rule after synonym or class-to-instance matching.
 """
 
 
@@ -68,10 +62,11 @@ class Generator:
             "Policy excerpts:\n"
             + "\n\n".join(excerpts)
             + f"\n\nQuestion: {question}\n\n"
-            "If the question is not answered by these excerpts even after synonym matching "
-            "(for example a benefit the excerpts never mention), refuse.\n"
+            "If no excerpt states an applicable rule after synonym and class-to-instance "
+            "matching (for example a benefit the excerpts never mention), refuse.\n"
             "Otherwise answer from the matching excerpt and set section to that excerpt's number.\n"
-            "If a condition is in the excerpt but not the question, still state the excerpt's rule."
+            "When an excerpt states a required class (for example a required fare class), "
+            "state that requirement when asked about a different class."
         )
         response = httpx.post(
             self._url,

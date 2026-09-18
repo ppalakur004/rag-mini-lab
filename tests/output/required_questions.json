@@ -2,7 +2,7 @@
   {
     "question": "How much can I spend on food each day?",
     "response": {
-      "answer": "Up to $65 per day",
+      "answer": "Up to $65",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -27,7 +27,7 @@
   {
     "question": "Can I book first-class airfare?",
     "response": {
-      "answer": "Business-class airfare requires written approval from a vice president.",
+      "answer": "Employees must purchase economy airfare. Business-class airfare requires written approval from a vice president.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -52,7 +52,7 @@
   {
     "question": "My hotel costs $250. What do I need?",
     "response": {
-      "answer": "A manager must approve the hotel costs. Receipts are required for individual expenses of $25 or more.",
+      "answer": "A manager must approve the booking.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
@@ -77,11 +77,11 @@
   {
     "question": "Do I need a receipt for a $20 taxi?",
     "response": {
-      "answer": "Receipts are required for individual expenses of $25 or more.",
+      "answer": "No, a receipt is not required for a $20 taxi as per Section 4. Ground Transportation.",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
-        "section": "5. Receipts"
+        "section": "4. Ground Transportation"
       },
       "retrieved_chunks": [
         {
@@ -102,7 +102,7 @@
   {
     "question": "Can I claim a limousine upgrade?",
     "response": {
-      "answer": "The provided policy does not reimburse limousine upgrades.",
+      "answer": "Not reimbursable",
       "citation": {
         "document": "Employee Expense Policy",
         "version": "2.0",
