@@ -39,12 +39,6 @@ python -m rag_lab ask "How much can I spend on food each day?"
 
 Prints JSON with `answer`, `citation`, and up to three `retrieved_chunks` (numeric distances).
 
-## Tests
-
-```bash
-pytest -v
-```
-
 ## Saved output for the six required questions
 
 ```bash
